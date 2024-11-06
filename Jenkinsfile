@@ -23,6 +23,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Clean and build the Maven project
+                dir('CalculatorApp')
                 bat 'mvn clean compile'
             }
         }
@@ -30,6 +31,7 @@ pipeline {
         stage('Test') {
             steps {
                 // Run tests
+                 dir('CalculatorApp')
                 bat 'mvn test'
             }
             post {
@@ -43,6 +45,7 @@ pipeline {
         stage('Package') {
             steps {
                 // Package the application into a JAR file
+                 dir('CalculatorApp')
                 bat 'mvn package'
             }
         }
