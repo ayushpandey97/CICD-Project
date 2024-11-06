@@ -36,12 +36,12 @@ pipeline {
                 bat 'mvn test'
                  }
             }
-            // post {
-            //     always {
-            //         // Publish test results
-            //         junit '**/target/surefire-reports/*.xml'
-            //     }
-            // }
+            post {
+                always {
+                    // Publish test results
+                    junit '**/target/surefire-reports/*.xml'
+                }
+            }
         }
 
         stage('Package') {
