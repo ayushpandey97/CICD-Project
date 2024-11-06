@@ -6,7 +6,7 @@ pipeline {
         jdk 'Java'        // Specify the Java version to use
     }
     environment {
-        EMAIL_RECIPIENTS = 'pandeyayush2511@gmail.com'  // Replace with your recipient's email address
+        EMAIL_RECIPIENTS = 'email@gmail.com'  // Replace with your recipient's email address
     }
     parameters {
         string(name: 'REPO_URL', defaultValue: 'https://github.com/ayushpandey97/CICD-Project.git')
