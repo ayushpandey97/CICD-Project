@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         maven 'Maven' // Specify the version of Maven installed on Jenkins
-        jdk 'Java'        // Specify the Java version to use
+        jdk 'Javauu'        // Specify the Java version to use
     }
     environment {
         EMAIL_RECIPIENTS = 'email@gmail.com'  // Replace with your recipient's email address
