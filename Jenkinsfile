@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         maven 'Maven' // Specify the version of Maven installed on Jenkins
-        jdk 'Javauu'        // Specify the Java version to use
+        jdk 'Java'        // Specify the Java version to use
     }
     environment {
         EMAIL_RECIPIENTS = 'pandeyayush2511@gmail.com'  // Replace with your recipient's email address
@@ -36,7 +36,7 @@ pipeline {
             steps {
                 // Run tests
                  dir('CalculatorApp'){
-                bat 'mvn test -X'
+                sh 'mvn test -X'
                  }
             }
             post {
