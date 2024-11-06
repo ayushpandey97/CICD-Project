@@ -33,7 +33,7 @@ pipeline {
             steps {
                 // Run tests
                  dir('CalculatorApp'){
-                bat 'mvn test'
+                bat 'mvn test -X'
                  }
             }
             post {
