@@ -5,6 +5,9 @@ pipeline {
         maven 'Maven' // Specify the version of Maven installed on Jenkins
         jdk 'Java'        // Specify the Java version to use
     }
+    environment {
+        EMAIL_RECIPIENTS = 'pandeyayush2511@gmail.com'  // Replace with your recipient's email address
+    }
     parameters {
         string(name: 'REPO_URL', defaultValue: 'https://github.com/ayushpandey97/CICD-Project.git')
         string(name: 'BRANCH', defaultValue: 'main', description: 'Branch to build')
@@ -65,9 +68,39 @@ pipeline {
     post {
         success {
             echo 'Pipeline completed successfully.'
+            // Email on success
+            emailext (
+                to: "${EMAIL_RECIPIENTS}",
+                subject: "Jenkins Build Success: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                body: "The build was successful.\n\n${BUILD_URL}"
+            )
         }
         failure {
             echo 'Pipeline failed.'
+            // Email on failure
+            emailext (
+                to: "${EMAIL_RECIPIENTS}",
+                subject: "Jenkins Build Failure: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                body: "The build failed.\n\n${BUILD_URL}\n\nCheck the Jenkins console output for details."
+            )
+        }
+        unstable {
+            echo 'Pipeline is unstable.'
+            // Email on unstable build (e.g., failing tests)
+            emailext (
+                to: "${EMAIL_RECIPIENTS}",
+                subject: "Jenkins Build Unstable: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                body: "The build is unstable.\n\n${BUILD_URL}\n\nCheck the Jenkins console output for details."
+            )
+        }
+        aborted {
+            echo 'Pipeline was aborted.'
+            // Email when the build is aborted
+            emailext (
+                to: "${EMAIL_RECIPIENTS}",
+                subject: "Jenkins Build Aborted: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                body: "The build was aborted.\n\n${BUILD_URL}"
+            )
         }
     }
 }
