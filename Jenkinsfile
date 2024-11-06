@@ -5,14 +5,20 @@ pipeline {
         maven 'Maven' // Specify the version of Maven installed on Jenkins
         jdk 'Java'        // Specify the Java version to use
     }
+    parameters {
+        string(name: 'REPO_URL', defaultValue: 'https://github.com/ayushpandey97/CICD-Project.git')
+        string(name: 'BRANCH', defaultValue: 'main', description: 'Branch to build')
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                // Clone the repository
-                git 'https://github.com/ayushpandey97/CICD-Project.git'
+               echo "Cloning from repository ${params.REPO_URL} on branch ${params.BRANCH}"
+                // Pull the repository
+                git branch: "${params.BRANCH}", url: "${params.REPO_URL}"
             }
-        }
+            }
+        
 
         stage('Build') {
             steps {
